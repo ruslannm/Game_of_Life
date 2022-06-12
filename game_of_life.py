@@ -5,13 +5,15 @@ from copy import deepcopy
 
 class SingletonMeta(type):
     _instances = {}
+    _kwargs = {}
     _lock: Lock = Lock()
 
     def __call__(cls, *args, **kwargs):
         with cls._lock:
-            if cls not in cls._instances or args or kwargs:
+            if cls not in cls._instances or args or (kwargs and kwargs not in cls._kwargs.values()):
                 instance = super().__call__(*args, **kwargs)
                 cls._instances[cls] = instance
+                cls._kwargs[cls] = kwargs
         return cls._instances[cls]
 
 

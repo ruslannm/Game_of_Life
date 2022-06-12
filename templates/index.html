@@ -1,4 +1,11 @@
 {% extends "base.html" %}
 {% block app_content %}
-<a class="btn btn-primary" href="{{ url_for('live') }}">Создать жизнь</a>
+<form action="/" method="post" class="form-size">
+    <p>Размеры игрового поля: Высота:<b>{{ height }}</b>, Ширина: <b>{{ width }}</b></p>
+    <p>Изменить размеры (минимум 10, максимум 30):</p>
+    <p><label>Высота: </label> <input type="number" name="height" value="20" requied min="10" max="30"/>
+    <p><label>Ширина: </label> <input type="number" name="width" value="20" requied min="10" max="30"/>
+    <p><input class="btn" type="submit" value="Установить" />
+</form>
+    <a class="btn btn-primary" href="{{ url_for('live', width=width, height=height) }}">Создать жизнь</a>
 {% endblock %}

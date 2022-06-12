@@ -7,14 +7,14 @@
 {% endblock %}
 {% block app_content %}
     <a class="btn btn-warning home" href="{{ url_for('index') }}">На главную</a>
-    <a class="btn btn-info refresh" href="{{ url_for('live') }}">Создать новую жизнь</a>
+    <a class="btn btn-info refresh" href="{{ url_for('live', width=width, height=height) }}">Создать новую жизнь</a>
     <table class="world">
         {% for i in range(life.world | length) %}
             <tr>
                 {% for j in  range(life.world[i] | length) %}
                     {% if life.world[i][j] %}
                         <td class="cell living-cell"></td>
-                    {% elif not life.world[i][j] and life.old_world[i][j]  %}
+                    {% elif not life.world[i][j] and life.old_world[i][j] %}
                         <td class="cell dead-cell"></td>
                     {% else %}
                         <td class="cell"></td>
